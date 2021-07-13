@@ -1,8 +1,12 @@
 import React from 'react';
+import CustomButton from '../custom-button/custom-button-component'
 
 import './preview-item.styles.scss';
+import { connect } from 'react-redux'
+import { addItem } from '../../redux/cart/cart.actions'
+const PreviewItem = ({item, addItem}) => {
+    const { name, price, imageUrl } = item;
 
-const PreviewItem = ({id, name, price, imageUrl}) => {
     return (
         <div className="preview-item">
             <div className="image" 
@@ -11,9 +15,13 @@ const PreviewItem = ({id, name, price, imageUrl}) => {
                 <span className="name">{name}</span>
                 <span className="price">{price}</span>
             </div>
-            {/* <button className="add-button">ADD TO KART</button> */}
+            <CustomButton onClick={() => addItem(item)} className="custom-button" inverted>ADD TO CART</CustomButton>
         </div>
     )
 }
 
-export default PreviewItem;
+const mapDispatchToProps = dispatch => ({
+    addItem: item => dispatch(addItem(item))
+})
+
+export default connect(null, mapDispatchToProps)(PreviewItem);
