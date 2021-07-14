@@ -29,7 +29,11 @@ const CheckoutPage = ({ cartItems, totalPrice }) =>(
                 <ChekoutItem key={cartItem.id} cartItem={cartItem}/>
             ))
         }
-        <div className='total'>TOTAL: Rs.{totalPrice}/- </div>
+        {
+            totalPrice ?
+            <div className='total'>TOTAL: Rs.{totalPrice}/- </div>: 
+            <div className='empty-message'>YOU HAVE NOT ADDED ANYTHING TO CART YET!</div>
+        }
     </div>
 )
 
